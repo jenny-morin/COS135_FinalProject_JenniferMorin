@@ -1,4 +1,8 @@
 #include "character.c"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 int main(){
     Character *Ripley = createCharacter("Ripley","Second in command",100);
@@ -13,49 +17,41 @@ int main(){
     }
 
     char buffer[1024];
+    char addChar[10];
+    char a[256];
+    char b[256];
+    char c[256];
 
     for(int i = 0; i<6; i++){
     if(fgets(buffer, sizeof(buffer), fp)!=NULL){
-        printf("Would you like to add: %s\n",buffer);
-        //cut this string up into the three parameters queen
-        Character *c = createCharacter("Ripley","Second in command",100);
-        printCharacter(Ripley); 
+
+        char *ptr = buffer + strlen(buffer)-1;
+        while (isspace(*(ptr))) ptr--;
+        *(ptr+1)=0;
+        ptr = buffer;
+        while (isspace(*ptr)) ptr++;
+
+        char* token = strtok(buffer,";");
+        strcpy(a,token);
+
+        token= strtok(NULL,";");//NULL is used when you want the prevous strtok location
+        strcpy(b,token);
+
+        token= strtok(NULL,";");//NULL is used when you want the prevous strtok location
+        strcpy(c,token);
+        }
+        int intOfC = atoi(c);
+        printf("Y/N Would you like to add- Name: %s; Rank: %s; Health %s;\t",a,b,c);
+        fgets(addChar, sizeof(addChar), stdin);
+        //printf("%s\n",addChar);
+        if (strcmp(addChar,"Y\n")==0){
+            Character *myChar = createCharacter(a,b,intOfC);
+            printCharacter(myChar);
+            //printf("worked");
+        }
+        else{
+            printf("You will be without your fearless %s\n",b);
         }
     }
     fclose(fp);
-
-
-
-
-
-    /*char buffer[20];
-    printf("How was your day today?(from 1-10):\n");
-    fgets(buffer, sizeof(buffer), stdin);
-    int input = atoi(buffer);
-    switch(input){
-        case 1:
-            printf("It can only get better from here\n");
-            break;
-        case 2:
-        case 3:
-        case 4:
-            printf("I hope it will get better\n");
-            break;
-        case 5:
-        case 6:
-        case 7:
-            printf("Not to bad, it could be worse\n");
-            break;
-        case 8:
-        case 9:
-            printf("Wow thats pretty good!\n");
-            break;
-        case 10:
-            printf("Yippee!!!!\n");
-            break;
-        default:
-            printf("Invalid number\n");
-            break;
-    }
-            */
 }

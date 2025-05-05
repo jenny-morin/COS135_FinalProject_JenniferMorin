@@ -1,6 +1,6 @@
-Name: Arthor Dallas; Rank: Captain; Health: 5;
-Name: Ellen Ripley; Rank: Warrant Officer; Health: 4;
-Name: Dennis Parker; Rank: Cheif Engineer; Health: 4;
-Name: Joan Lambert; Rank: Navigator; Health: 4;
-Name: Samuel Brett; Rank: Engineering Tech; Health: 3;
-Name: Jonsey; Rank: Cat; Health: NULL;
+Arthor Dallas;Captain;5
+Ellen Ripley;Warrant Officer;4;
+Dennis Parker;Cheif Engineer;4;
+Joan Lambert;Navigator;4;
+Samuel Brett;Engineering Tech;3;
+Jonsey;Cat;NULL;
