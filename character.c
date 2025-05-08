@@ -11,7 +11,7 @@ Character* createCharacter(char *name, char *job, int health){
 }
 
 void printCharacter(Character* aCharacter){
-    printf("Name: %s  \nJob: %s \nHealth(0-100): %d \n",aCharacter->name,aCharacter->job,aCharacter->health);
+    printf("Name: %s  \nJob: %s \nHealth: %d \n",aCharacter->name,aCharacter->job,aCharacter->health);
 }
 
 void freeCharacter(Character* aCharacter){

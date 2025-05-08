@@ -3,4 +3,4 @@ Ellen Ripley;Warrant Officer;4;
 Dennis Parker;Cheif Engineer;4;
 Joan Lambert;Navigator;4;
 Samuel Brett;Engineering Tech;3;
-Jonsey;Cat;NULL;
+Jonsey;Cat;6;
