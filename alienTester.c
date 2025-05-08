@@ -18,9 +18,7 @@
 
 int main()
 {
-    Character *Ripley = createCharacter("Ripley", "Second in command", 100);
-    printCharacter(Ripley);
-    freeCharacter(Ripley);
+    
     Ship *nostromo = createShip();
     int *onShip[6];
 
@@ -104,12 +102,13 @@ int main()
             break;
         }
     }
-
+    
     printShip(nostromo);
     // PRINT AN ENDING STRING TELLING USER IF THEY WON OR LOST
+    
     endGame(nostromo);
-
+    
     // FREE EVERYTHING
-    free(nostromo);
+    freeShip(nostromo);
     fclose(fp);
 }

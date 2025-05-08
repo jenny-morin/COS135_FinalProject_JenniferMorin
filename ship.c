@@ -15,7 +15,7 @@
 Ship* createShip(){
     Ship* j = malloc(sizeof(Ship));
     j->crew = malloc(sizeof(Character*)*6);
-    j->name = malloc(sizeof(char)*strlen("NOSTROMO"));
+    j->name = malloc(sizeof(char)*(strlen("NOSTROMO")+2));
 
     strcpy(j->name,"NOSTROMO");
 
@@ -79,18 +79,29 @@ void endGame(Ship* aShip){
     int checker = 0;
     for(int i =0;i<5;i++){
         if (aShip->crew[i]!=NULL && aShip->crew[i]->health != 0){
+            
             printf("%s%s has made it off this ship and escaped!\n%s",YEL,aShip->crew[i]->name,RESET);
             checker++;
 
         }
     }
+    
     if (checker == 0){
-        printf("%sEveryone except Jonsey has died, and he's a cat so you lost%s\n",RED,RESET);
+        if (aShip->crew[5]!=NULL){
+            printf("%sEveryone except Jonsey has died, and he's a cat so you lost%s\n",RED,RESET);
+        }
+        else{
+        printf("%sYOU LOSE\n%s",RED,RESET);
+        }
     }
+    
 }
 
 void freeShip(Ship* aShip){
+    
+    
     for(int i =0;i<6;i++){
+        
         freeCharacter(aShip->crew[i]);
     }
     free(aShip->crew);
