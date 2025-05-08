@@ -13,8 +13,6 @@ typedef struct Ship Ship;
 struct Ship{
     char* name;
     Character** crew;
-    bool blownUp;
-    int points;
 };
 
 Ship* createShip();
@@ -25,6 +23,8 @@ void searchForAlien(int person, Ship* aShip);
 
 void printShip(Ship* aShip);
 
-//void freeShip(Ship* aShip);
+void endGame(Ship* aShip);
+
+void freeShip(Ship* aShip);
 
 #endif

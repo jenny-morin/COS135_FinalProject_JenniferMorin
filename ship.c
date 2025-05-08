@@ -16,10 +16,9 @@ Ship* createShip(){
     Ship* j = malloc(sizeof(Ship));
     j->crew = malloc(sizeof(Character*)*6);
     j->name = malloc(sizeof(char)*strlen("NOSTROMO"));
-    j->blownUp = malloc(sizeof(bool));
-    j->points = 0;
+
     strcpy(j->name,"NOSTROMO");
-    j->blownUp = false;
+
     for (int i = 0; i<6;i++){
         j->crew[i]=NULL;
     }
@@ -32,12 +31,30 @@ void addCharacter(Character *aCharacter, Ship* aShip, int place){
 }
 
 void searchForAlien(int person, Ship* aShip){
+    if (aShip->crew[person]==NULL){
+        printf("You choose someone not in your crew, your turn is wasted\n");
+    }
+    else if (aShip->crew[person]->health == 0){
+        printf("%s is already %sdead%s, your turn is wasted\n",aShip->crew[person]->name,RED,RESET);
+    }
+    else if(aShip->crew[person]->health == 1){
+        aShip->crew[person]->health =0;
+        printf("In searching for the alien %s has %sdied%s\n",aShip->crew[person]->name,RED,RESET);
+    }
+    else{
     int probability = 100;
     probability = rand() % probability;
     if (probability>20){
         int n =aShip->crew[person]->health;
         n = rand() % n;
         aShip->crew[person]->health-=n;
+        if (aShip->crew[person]->health==0){
+            printf("In searching for the alien %s has %sdied%s\n",aShip->crew[person]->name,RED,RESET);
+        }
+        else{
+        printf("\n%s's health has been lowered to %d\n",aShip->crew[person]->name,aShip->crew[person]->health);
+        }
+    }
     }
 }
 
@@ -58,4 +75,25 @@ void printShip(Ship* aShip){
     }
 }
 
-//void freeShip(Ship* aShip);
+void endGame(Ship* aShip){
+    int checker = 0;
+    for(int i =0;i<5;i++){
+        if (aShip->crew[i]!=NULL && aShip->crew[i]->health != 0){
+            printf("%s%s has made it off this ship and escaped!\n%s",YEL,aShip->crew[i]->name,RESET);
+            checker++;
+
+        }
+    }
+    if (checker == 0){
+        printf("%sEveryone except Jonsey has died, and he's a cat so you lost%s\n",RED,RESET);
+    }
+}
+
+void freeShip(Ship* aShip){
+    for(int i =0;i<6;i++){
+        freeCharacter(aShip->crew[i]);
+    }
+    free(aShip->crew);
+    free(aShip->name);
+    free(aShip);
+}
